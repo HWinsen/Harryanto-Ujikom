@@ -12,6 +12,16 @@ namespace TriviaGame.PubSub
     public struct MessageTimeOut { }
     public struct MessageStopCountdown { }
 
+    public struct MessageAnswerQuestion
+    {
+        public int answer;
+
+        public MessageAnswerQuestion(int answer)
+        {
+            this.answer = answer;
+        }
+    }
+
     public struct MessageUnlockPack
     {
         public int packID;
@@ -21,4 +31,7 @@ namespace TriviaGame.PubSub
             this.packID = packID;
         }
     }
+
+    public struct MessageGameplayToLevel { }
+    public struct MessageGameplayToPack { }
 }

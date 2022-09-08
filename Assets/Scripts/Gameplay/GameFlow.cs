@@ -59,14 +59,14 @@ namespace TriviaGame.Gameplay
             else
             {
                 Debug.Log("false");
-                SceneManager.LoadScene("Level");
+                PublishSubscribe.Instance.Publish<MessageGameplayToLevel>(new MessageGameplayToLevel());
             }
         }
 
         public void Timeout(MessageTimeOut message)
         {
             Debug.Log("Timeout");
-            SceneManager.LoadScene("Level");
+            PublishSubscribe.Instance.Publish<MessageGameplayToLevel>(new MessageGameplayToLevel());
         }
     }
 }
