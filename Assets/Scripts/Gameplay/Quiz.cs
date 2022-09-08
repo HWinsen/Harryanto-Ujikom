@@ -55,11 +55,14 @@ namespace TriviaGame.Gameplay
             //}
 
             questionText.text = level.Question;
-            answerButtons = new Button[level.Choice.Length];
-            for (int i = 0; i < level.Choice.Length; i++)
+            //answerButtons = new Button[level.Choice.Length];
+
+            hintImage.sprite = Resources.Load<Sprite>(@"Sprites/Level Pack A/" + level.Hint);
+
+            answerButtons = GetComponentsInChildren<Button>();
+
+            for (int i = 0; i < answerButtons.Length; i++)
             {
-                Debug.Log("masuk");
-                answerButtons[i] = Instantiate(Resources.Load<Button>(@"Prefabs/AnswerButton"), transform.position, Quaternion.identity);
                 answerButtons[i].GetComponentInChildren<Text>().text = level.Choice[i];
                 answerButtons[i].onClick.RemoveAllListeners();
                 //temp.onClick.AddListener();
