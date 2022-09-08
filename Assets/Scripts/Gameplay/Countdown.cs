@@ -17,7 +17,7 @@ namespace TriviaGame.Gameplay
         // Start is called before the first frame update
         void Start()
         {
-            Remaining = 3;
+            Remaining = 30;
 
             //countdownText = GetComponent<Text>();
             countdownText = GetComponentInChildren<Text>();

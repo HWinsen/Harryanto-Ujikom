@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TriviaGame.Database;
 using Agate.MVC.Core;
 using TriviaGame.PubSub;
+using UnityEngine.Events;
 
 namespace TriviaGame.Gameplay
 {
@@ -13,6 +14,7 @@ namespace TriviaGame.Gameplay
         [SerializeField] private Text questionText;
         [SerializeField] private Image hintImage;
         [SerializeField] private Button[] answerButtons;
+        private UnityAction actionClick;
 
         // Start is called before the first frame update
         void Start()
@@ -28,50 +30,27 @@ namespace TriviaGame.Gameplay
 
         public void InitQuiz(LevelStruct level)
         {
-            //foreach (Theme theme in DatabaseController.Instance.level)
-            //{
-            //    var tempButton = Instantiate(_themeButton, transform.position, Quaternion.identity);
-            //    tempButton.name = theme.themeName;
-            //    TMP_Text buttonText = tempButton.GetComponentInChildren<TMP_Text>();
-            //    if (theme.isUnlocked)
-            //    {
-            //        buttonText.SetText($"{tempButton.name}");
-            //    }
-            //    else
-            //    {
-            //        buttonText.SetText($"Buy {tempButton.name} {theme.price}g");
-            //    }
-            //    tempButton.onClick.RemoveAllListeners();
-            //    tempButton.onClick.AddListener(() =>
-            //    {
-            //        if (theme.isUnlocked)
-            //        {
-            //            ChangeTheme(tempButton.name);
-            //        }
-            //        else
-            //        {
-            //            UnlockTheme(tempButton.name, buttonText);
-            //        }
-            //    });
-            //    tempButton.transform.SetParent(gameObject.transform);
-            //}
-
             questionText.text = level.Question;
-            //answerButtons = new Button[level.Choice.Length];
 
             hintImage.sprite = Resources.Load<Sprite>(@"Sprites/Level Pack A/" + level.Hint);
 
             answerButtons = GetComponentsInChildren<Button>();
-
+            
             for (int i = 0; i < answerButtons.Length; i++)
             {
+                int x = i+1;
                 answerButtons[i].GetComponentInChildren<Text>().text = level.Choice[i];
+                
                 answerButtons[i].onClick.RemoveAllListeners();
+                
                 answerButtons[i].onClick.AddListener(() =>
                 {
                     PublishSubscribe.Instance.Publish<MessageStopCountdown>(new MessageStopCountdown());
+
+                    PublishSubscribe.Instance.Publish<MessageAnswerQuestion>(new MessageAnswerQuestion(x));
                 });
                 answerButtons[i].transform.SetParent(gameObject.transform);
+                
             }
         }
     }
