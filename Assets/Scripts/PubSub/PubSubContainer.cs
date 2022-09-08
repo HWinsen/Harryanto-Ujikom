@@ -12,13 +12,13 @@ namespace TriviaGame.PubSub
     public struct MessageTimeOut { }
     public struct MessageStopCountdown { }
 
-    public struct MessageAnswerQuestion
+    public struct MessageUnlockPack
     {
-        public int answer;
+        public int packID;
 
-        public MessageAnswerQuestion(int answer)
+        public MessageUnlockPack(int packID)
         {
-            this.answer = answer;
+            this.packID = packID;
         }
     }
 }
