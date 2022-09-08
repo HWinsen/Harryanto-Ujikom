@@ -1,62 +1,86 @@
+using Agate.MVC.Core;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TriviaGame.PubSub;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Countdown : MonoBehaviour
+namespace TriviaGame.Gameplay
 {
-    private float Remaining;
-    Text coundownText;
-
-    // Start is called before the first frame update
-    void Start()
+    public class Countdown : MonoBehaviour
     {
-        Remaining = 30;
-        coundownText = GetComponent<Text>();
-        coundownText.text = Remaining.ToString();
-    }
+        private float Remaining;
+        private Text countdownText;
+        private Slider countdownSlider;
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Remaining > 0)
+        // Start is called before the first frame update
+        void Start()
         {
-            StartCountdown();
+            Remaining = 3;
+
+            //countdownText = GetComponent<Text>();
+            countdownText = GetComponentInChildren<Text>();
+            countdownText.text = Remaining.ToString();
+
+            countdownSlider = GetComponentInChildren<Slider>();
+            countdownSlider.maxValue = Remaining;
+            countdownSlider.value = Remaining;
+
+            this.enabled = true;
+
+            PublishSubscribe.Instance.Subscribe<MessageStopCountdown>(StopCountdown);
         }
-        else
+
+        private void OnDestroy()
         {
-            StopCountdown();
+            PublishSubscribe.Instance.Unsubscribe<MessageStopCountdown>(StopCountdown);
         }
-    }
 
-    public void StartCountdown()
-    {
-        //Debug.Log(Convert.ToInt64(Time.deltaTime));
+        // Update is called once per frame
+        void Update()
+        {
+            if (Remaining > 0)
+            {
+                StartCountdown();
+            }
+            else
+            {
+                FinishCountdown();
+            }
+        }
 
-        //string timeString = string.Format("{0:0.0000}", Time.deltaTime);
-        //Remaining -= long.Parse(timeString.Replace(".", ""));
+        public void StartCountdown()
+        {
+            //Debug.Log(Convert.ToInt64(Time.deltaTime));
 
-        //Remaining -= Convert.ToInt64(Time.deltaTime);
-        //Remaining -= Time.deltaTime;
+            //string timeString = string.Format("{0:0.0000}", Time.deltaTime);
+            //Remaining -= long.Parse(timeString.Replace(".", ""));
 
-        //float tempSec = 0;
-        //tempSec += Time.deltaTime;
-        //Remaining -= Convert.ToInt64(MathF.Round(tempSec));
-        //if (tempSec > 1) tempSec = 0;
-        //Debug.Log(tempSec);
+            //Remaining -= Convert.ToInt64(Time.deltaTime);
+            //Remaining -= Time.deltaTime;
 
-        Remaining -= Time.deltaTime;
-        coundownText.text = Remaining.ToString();
-    }
+            //float tempSec = 0;
+            //tempSec += Time.deltaTime;
+            //Remaining -= Convert.ToInt64(MathF.Round(tempSec));
+            //if (tempSec > 1) tempSec = 0;
+            //Debug.Log(tempSec);
 
-    public void StopCountdown()
-    {
-        Time.timeScale = 0;
-    }
+            Remaining -= Time.deltaTime;
+            countdownText.text = Remaining.ToString();
+            countdownSlider.value = Remaining;
+        }
 
-    public void FinishCountdown()
-    {
+        public void StopCountdown(MessageStopCountdown message)
+        {
+            this.enabled = false;
+        }
 
+        public void FinishCountdown()
+        {
+            countdownText.text = "0";
+            this.enabled = false;
+            PublishSubscribe.Instance.Publish<MessageTimeOut>(new MessageTimeOut());
+        }
     }
 }

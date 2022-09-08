@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TriviaGame.Database;
+using Agate.MVC.Core;
+using TriviaGame.PubSub;
 
 namespace TriviaGame.Gameplay
 {
@@ -65,7 +67,10 @@ namespace TriviaGame.Gameplay
             {
                 answerButtons[i].GetComponentInChildren<Text>().text = level.Choice[i];
                 answerButtons[i].onClick.RemoveAllListeners();
-                //temp.onClick.AddListener();
+                answerButtons[i].onClick.AddListener(() =>
+                {
+                    PublishSubscribe.Instance.Publish<MessageStopCountdown>(new MessageStopCountdown());
+                });
                 answerButtons[i].transform.SetParent(gameObject.transform);
             }
         }

@@ -210,9 +210,8 @@ GameObject:
   - component: {fileID: 181442945}
   - component: {fileID: 181442947}
   - component: {fileID: 181442946}
-  - component: {fileID: 181442948}
   m_Layer: 5
-  m_Name: Countdown
+  m_Name: CountdownText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -280,18 +279,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 181442944}
   m_CullTransparentMesh: 1
---- !u!114 &181442948
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 181442944}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e2d3140e3ac36b49861776fded20e01, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &190857984
 GameObject:
   m_ObjectHideFlags: 0
@@ -303,7 +290,7 @@ GameObject:
   - component: {fileID: 190857985}
   - component: {fileID: 190857986}
   m_Layer: 5
-  m_Name: Slider
+  m_Name: CountdownSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1336,8 +1323,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1679444111}
   - component: {fileID: 1679444112}
+  - component: {fileID: 1679444113}
   m_Layer: 5
-  m_Name: GameObject
+  m_Name: Countdown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1391,6 +1379,18 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &1679444113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1679444110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e2d3140e3ac36b49861776fded20e01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1692491247
 GameObject:
   m_ObjectHideFlags: 0
@@ -2199,6 +2199,50 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!1 &2117339197
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2117339199}
+  - component: {fileID: 2117339198}
+  m_Layer: 0
+  m_Name: GameFlow
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2117339198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2117339197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae6691218b1c7fe488eecf61f40c40ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &2117339199
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2117339197}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 100.4212, y: 347.53595, z: -1.4034218}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2119586190
 GameObject:
   m_ObjectHideFlags: 0
